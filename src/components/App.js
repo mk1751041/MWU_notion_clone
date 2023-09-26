@@ -1,7 +1,15 @@
-import Editor from "./Editor.js";
-import Sidebar from "./Sidebar.js";
+import Editor from "./editor/Editor.js";
+import PostPage from "./sidebar/PostPage.js";
 
 export default function App({ $target }){
+    const $listContainer = document.createElement('div')
+    $listContainer.className = 'listContainer'
+    const $rendingContainer = document.createElement('div')
+    $rendingContainer.className = 'rendingContainer'
+
+    $target.appendChild($listContainer)
+    $target.appendChild($rendingContainer)
+
     const testData = [
         {
             "id": 1, // Document id
@@ -26,11 +34,13 @@ export default function App({ $target }){
             "documents": []
         },
     ]
-    new Editor({
-        $target
-    })
-    new Sidebar({
-        $target,
+
+    new PostPage({
+        $target: $listContainer,
         initialState: testData  
+    })
+
+    new Editor({
+        $target: $rendingContainer
     })
 }
