@@ -24,7 +24,7 @@ export default function App({ $target }){
             "id": 4,
             "title": "hello!",
             "documents": []
-        }
+        },
     ]
     new Editor({
         $target
