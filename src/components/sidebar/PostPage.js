@@ -1,4 +1,5 @@
 import { request } from "../../utils/api.js"
+import NewBtn from "../button/NewBtn.js"
 import PostList from "./PostList.js"
 
 export default function PostPage({ $target }){
@@ -26,10 +27,13 @@ export default function PostPage({ $target }){
     })
 
     // TODO: 컴포넌트화 시키기
-    const $newBtn = document.createElement('button')
-    $newBtn.textContent = '+ New Page'
-    $newBtn.className = 'addNew'
-    $page.appendChild($newBtn)
+    new NewBtn({
+        $target: $page,
+        initialState: {
+            text: '+ New Page',
+            name: 'addNew'
+        }
+    })
 
     this.setState = async () => {
         const posts = await request('/documents')
