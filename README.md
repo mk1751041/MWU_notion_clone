@@ -11,6 +11,5 @@
 - [x] 전체 목록 api 연동
 - [x] 등록버튼 컴포넌트 화
 - [x] Editor, EditorPage컨포넌트 분리
-- [ ] EditorPage 1차 구현
-- [ ] Editor 1차 구현
+- [x] EditorPage, Editor 1차 구현
 - [ ] Editor, EditorPage 구현 마무리
