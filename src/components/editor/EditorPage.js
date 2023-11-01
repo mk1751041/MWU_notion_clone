@@ -6,29 +6,36 @@ export default function EditorPage({ $target, initialState }) {
 
     this.state = initialState;
 
-    const isNew = true
-    const tempPost = {
-        title: '123123',
-        content: 'testtest'
+    const post = {
+        title: '',
+        content: ''
     }
 
-    new Editor({
+    const editor = new Editor({
         $target: $page,
-        initialState: {
-            title: '',
-            content: ''
-        },
-        onEditing: () => {
-            setTimeout(() => {
-                if(isNew){
-                    request('/documents', {
+        initialState: post,
+        onEditing: async (editPost) => {
+            setTimeout(async () => {
+                if(this.state.postId === 'new'){
+                    const responsePost = await request('/documents', {
                         method: 'POST',
-                        body: JSON.stringify(tempPost)
+                        body: JSON.stringify(editPost)
+                    })
+
+                    if(editPost.content){
+                        await request(`/documents/${responsePost.id}`, {
+                            method: 'PUT',
+                            body: JSON.stringify(editPost)
+                        })
+                    }
+
+                    this.setState({
+                        postId: responsePost.id
                     })
                 } else {
-                    request('/documents', {
+                    await request(`/documents/${this.state.postId}`, {
                         method: 'PUT',
-                        body: JSON.stringify(tempPost)
+                        body: JSON.stringify(editPost)
                     })
                 }
             }, 1000)
@@ -36,9 +43,34 @@ export default function EditorPage({ $target, initialState }) {
     })
 
 
-    this.setState = (nextState) => {
+    this.setState = async (nextState) => {
+        if(nextState === undefined){
+            return
+        }
+
+        if(this.state.postId !== nextState.postId){
+            if(this.state.postId === 'new'){
+                this.render()
+                editor.setState(post)
+            } else{
+                if(this.state.postId !== 'new'){
+                    const responsePost = await request(`/documents/${this.state.postId}`)
+                    this.setState({
+                        ...this.state,
+                        responsePost
+                    })
+                }
+            }
+            return
+        }
         this.state = nextState
+
         this.render()
+
+        editor.setState(this.state.post || {
+            title: '',
+            content: ''
+        })
     }
 
     this.render = () => {

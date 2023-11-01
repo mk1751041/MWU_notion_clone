@@ -17,6 +17,14 @@ export default function App({ $target }){
 
     const editorPage = new EditorPage({
         $target: $rendingContainer,
-        initialState: {}
+        initialState: {
+            postId: 'new',
+            post: {
+                title: '',
+                content:''
+            }
+        }
     })
+
+    // editorPage.setState()
 }
