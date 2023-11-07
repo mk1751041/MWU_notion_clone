@@ -16,3 +16,4 @@
 - [x] Editor, EditorPage 리펙토링
 - [x] Sidebar 삭제 구현
 - [x] Sidebar 등록 구현
+- [x] 라우터 파일 만들기
