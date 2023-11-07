@@ -1,4 +1,4 @@
-import { request } from "../../utils/api.js"
+import { pushUrl } from "../../utils/Router.js"
 
 export default function PostList({ $target, initialState, onAttach, onDelete }){
     const $postList = document.createElement('div')
@@ -56,6 +56,11 @@ export default function PostList({ $target, initialState, onAttach, onDelete }){
             onAttach(id)
         } else if(className === 'delBtn'){
             onDelete(id)
+        } else if(className === 'dataBtn'){
+            if($li){
+                const id = $li.dataset.id
+                pushUrl(`document/${id}`)
+            }
         }
     })
 }

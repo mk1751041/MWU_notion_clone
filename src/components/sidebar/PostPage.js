@@ -1,4 +1,5 @@
 import { request } from "../../utils/api.js"
+import { pushUrl } from "../../utils/Router.js"
 import NewBtn from "../button/NewBtn.js"
 import PostList from "./PostList.js"
 
@@ -25,6 +26,7 @@ export default function PostPage({ $target }){
             await request(`/documents/${id}`, {
                 method: 'DELETE'
             })
+            pushUrl('/')
             this.setState()
         }
     })
@@ -34,7 +36,8 @@ export default function PostPage({ $target }){
         $target: $page,
         initialState: {
             text: '+ New Page',
-            name: 'addNew'
+            name: 'addNew',
+            link: 'new'
         }
     })
 
