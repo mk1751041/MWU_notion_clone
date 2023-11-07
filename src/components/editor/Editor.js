@@ -19,8 +19,8 @@ export default function Editor({ $target, initialState, onEditing }){
             <input type="text" name="title" class="editorTitle" value="" placeholder="UnTitle" autofocus />
             <textarea name="content" class="editorContent" placeholder="제목을 입력하세요" autofocus></textarea>
         `
-        }
         isInit = true
+        }
     }
 
     $editer.addEventListener('click', (e) => {

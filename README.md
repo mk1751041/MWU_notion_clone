@@ -18,3 +18,4 @@
 - [x] Sidebar 등록 구현
 - [x] 라우터 파일 만들기
 - [x] Sidebar, Editor 데이터 연동
+- [x] 에러 수정
